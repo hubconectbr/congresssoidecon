@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congresso Internacional IDECON</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome para ícones de redes sociais e WhatsApp -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Definindo a paleta de cores baseada na imagem fornecida */
+        :root {
+            --color-deep-blue: #1b1b2d; /* Azul Escuro / Quase Preto - Fundo principal do body */
+            --color-main-blue: #094ca8; /* Azul Principal - Para botões, títulos em seções claras, e agora o footer */
+            --color-medium-blue: #3881cc; /* Azul Médio - Para gradientes, hover de botões */
+            --color-light-blue-bg: #daebf6; /* Azul Muito Claro / Quase Branco - Para fundos de seções claras */
+            --color-lighter-blue: #76aeec; /* Azul Claro - Para texto em fundos escuros, ou acentos */
+
+            --color-text-on-dark: #ffffff; /* Cor de texto para fundos escuros */
+            --color-text-on-light: #333333; /* Cor de texto para fundos claros */
+            --color-card-background: #ffffff; /* Fundo de cards (mantido branco para contraste) */
+            --color-border-light: #B0C4DE; /* Borda sutil com tom azulado */
+            --color-whatsapp-green: #25D366; /* Cor verde do WhatsApp */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-deep-blue); /* Fundo geral em azul profundo */
+            color: var(--color-text-on-dark); /* Texto padrão em branco para o body */
+        }
+        .gradient-bg {
+            background: linear-gradient(to right, var(--color-deep-blue), var(--color-main-blue));
+        }
+        .text-main-blue { /* Nova classe para texto com a cor principal */
+            color: var(--color-main-blue);
+        }
+        .bg-main-blue {
+            background-color: var(--color-main-blue);
+        }
+        .border-main-blue {
+            border-color: var(--color-main-blue);
+        }
+        .btn-primary {
+            background-color: var(--color-main-blue);
+            color: var(--color-text-on-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: var(--color-medium-blue);
+            transform: translateY(-2px);
+        }
+        .speaker-card {
+            background-color: var(--color-medium-blue); /* Fundo dos cards dos palestrantes em azul médio */
+            border-radius: 0.75rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .speaker-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .speaker-image { /* Estilo para as imagens dos palestrantes - quadrado/retangular com borda */
+            width: 320px; /* Aumentado em 100% (de 160px para 320px) */
+            height: 320px; /* Aumentado em 100% (de 160px para 320px) */
+            object-fit: contain; /* Garante que a imagem completa seja visível, sem cortar */
+            border-radius: 0.75rem; /* Cantos arredondados, não mais circular */
+            margin-bottom: 1rem;
+            border: 4px solid var(--color-main-blue); /* Borda azul */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .section-title {
+            position: relative;
+            padding-bottom: 0.75rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--color-text-on-dark); /* Títulos de seção em branco no fundo escuro */
+            text-align: center;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--color-main-blue); /* Linha do título em azul principal */
+            border-radius: 2px;
+        }
+        /* Ajustes para a nova seção de introdução */
+        .intro-section {
+            padding: 4rem 1rem;
+            color: var(--color-text-on-dark);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .program-day-card {
+            background-color: var(--color-card-background);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .program-day-card h3 {
+            color: var(--color-main-blue);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .program-day-card ul li {
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed var(--color-border-light);
+        }
+        .program-day-card ul li:last-child {
+            border-bottom: none;
+        }
+        .program-day-card .time {
+            font-weight: 600;
+            color: var(--color-main-blue); /* Horário usando o azul principal */
+        }
+        .program-day-card .speaker-name {
+            font-style: italic;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        /* Animações para a seção de introdução */
+        @keyframes fadeInUpx {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUpx 0.8s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+        .animate-fade-in-up.delay-100 { animation-delay: 0.1s; }
+        .animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
+        .animate-fade-in-up.delay-300 { animation-delay: 0.3s; }
+        .animate-fade-in-up.delay-400 { animation-delay: 0.4s; }
+
+        /* Estilos específicos para as seções com a nova paleta */
+        #sobre, #programacao, #inscricao {
+            background-color: var(--color-light-blue-bg); /* Azul claro para essas seções */
+            color: var(--color-text-on-light); /* Texto escuro nessas seções */
+        }
+        #sobre .section-title, #programacao .section-title, #inscricao .section-title {
+            color: var(--color-main-blue); /* Títulos dessas seções em azul principal */
+        }
+        #palestrantes {
+            background-color: var(--color-deep-blue); /* Fundo da seção de palestrantes em azul profundo */
+            color: var(--color-text-on-dark); /* Texto branco para palestrantes */
+        }
+        #palestrantes .section-title {
+            color: var(--color-text-on-dark); /* Título da seção de palestrantes em branco */
+        }
+        /* Texto dentro dos cards de palestrantes agora é branco */
+        #palestrantes .speaker-card p {
+            color: var(--color-text-on-dark); /* Descrição do palestrante em branco no card azul */
+        }
+        #sobre .flex.flex-col.items-center { /* Cards de informação na seção "Sobre" */
+            background-color: var(--color-card-background); /* Fundo branco para os cards de informação */
+            color: var(--color-text-on-light); /* Texto escuro nos cards de informação */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adicionado transição para hover */
+        }
+        #sobre .flex.flex-col.items-center:hover { /* Efeito de hover para os cards de informação */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        #sobre .flex.flex-col.items-center svg {
+            color: var(--color-main-blue); /* Ícones em azul principal */
+        }
+        #inscricao .speaker-card { /* Cards de inscrição */
+            background-color: var(--color-card-background); /* Fundo branco para os cards de inscrição */
+            color: var(--color-text-on-light); /* Texto escuro nos cards de inscrição */
+        }
+
+        /* Novo Footer Styles */
+        .footer {
+            background-color: var(--color-main-blue); /* Fundo do rodapé em Azul Principal (#094ca8) */
+            color: var(--color-text-on-dark);
+            font-family: 'Inter', sans-serif; /* Mantendo a fonte Inter */
+            padding: 40px 20px 20px;
+            border-top-left-radius: 0.75rem; /* Mantendo arredondamento superior */
+            border-top-right-radius: 0.75rem; /* Mantendo arredondamento superior */
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Mantendo sombra */
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px; /* Espaçamento antes do social icons/bottom */
+        }
+
+        @media (min-width: 768px) {
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        .footer-logo {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .footer-logo {
+                margin-bottom: 0;
+                margin-right: 40px; /* Espaçamento entre logo e colunas */
+                text-align: left;
+                flex-shrink: 0;
+            }
+        }
+
+        .footer-logo img {
+            max-width: 180px;
+            height: auto;
+        }
+
+        .footer-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            width: 100%; /* Ocupa toda a largura disponível */
+            justify-content: center; /* Centraliza as colunas em telas menores */
+            margin-bottom: 30px; /* Espaçamento antes do social icons */
+        }
+
+        @media (min-width: 768px) {
+            .footer-columns {
+                flex-wrap: nowrap; /* Impede quebras de linha em telas maiores */
+                justify-content: flex-start; /* Alinha à esquerda em telas maiores */
+                flex-grow: 1; /* Permite que as colunas ocupem o espaço restante */
+            }
+        }
+
+        .footer-column {
+            flex: 1 1 200px; /* Cresce e encolhe, com base de 200px */
+            text-align: center; /* Centraliza o texto em telas menores */
+        }
+
+        @media (min-width: 768px) {
+            .footer-column {
+                text-align: left; /* Alinha o texto à esquerda em telas maiores */
+            }
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--color-text-on-dark); /* Títulos das colunas em branco */
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column li,
+        .footer-column a,
+        .footer-column p {
+            color: var(--color-lighter-blue); /* Texto das colunas em azul claro */
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block; /* Garante que os itens da lista fiquem em suas próprias linhas */
+        }
+
+        .footer-column a:hover {
+            color: var(--color-text-on-dark); /* Links no hover em branco */
+        }
+
+        .footer-social {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Espaçamento entre os ícones */
+        }
+
+        .footer-social a {
+            display: inline-block;
+            color: var(--color-text-on-dark); /* Cor dos ícones */
+            font-size: 24px; /* Tamanho dos ícones */
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--color-lighter-blue); /* Cor no hover */
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid var(--color-medium-blue); /* Borda em azul médio */
+            padding-top: 15px;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: var(--color-lighter-blue); /* Copyright em azul mais claro */
+        }
+
+        /* Estilos para o mapa */
+        .map-section {
+            background-color: var(--color-light-blue-bg);
+            color: var(--color-text-on-light);
+            padding: 4rem 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        .map-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Estilos para o botão flutuante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: var(--color-whatsapp-green);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000; /* Garante que fique acima de outros elementos */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .whatsapp-float:hover {
+            background-color: #1DA851; /* Um verde um pouco mais escuro no hover */
+            transform: scale(1.05);
+        }
+        .whatsapp-float i {
+            margin-top: 4px; /* Ajuste fino para centralizar o ícone */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Banner Principal (no topo, sem cobrir nada) -->
+    <div id="main-banner" class="w-full overflow-hidden">
+        <img src="images/banner_principal_idecon.jpg" alt="Banner Principal IDECON" class="w-full h-auto object-cover">
+    </div>
+
+    <!-- Seção de Introdução (antigo Hero Section, agora com gradiente) -->
+    <section id="intro" class="gradient-bg intro-section">
+        <div class="container mx-auto">
+           <! <img src="images/logo_idecon.png" alt="Logo IDECON" class="mx-auto mb-6 w-48 h-auto"!>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 animate-fade-in-up">
+                Congresso Internacional IDECON
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-3 animate-fade-in-up delay-100">
+                Regulação da Proteção de Dados, IA e Cibersegurança
+            </p>
+            <p class="text-lg md:text-xl font-semibold mb-2 animate-fade-in-up delay-200">
+                18 e 19 de agosto de 2025
+            </p>
+            <p class="text-md md:text-lg mb-8 animate-fade-in-up delay-300">
+                Híbrido: Presencial em Brasília/DF + Transmissão Online
+            </p>
+            <a href="#inscricao" class="btn-primary inline-block font-bold text-lg animate-fade-in-up delay-400">Garanta Sua Vaga!</a>
+        </div>
+    </section>
+
+    <!-- Sobre o Evento -->
+    <section id="sobre" class="py-20 px-4 md:px-8 lg:px-16 rounded-lg shadow-md mx-auto mt-8 max-w-7xl">
+        <div class="container mx-auto text-center">
+            <h2 class="section-title animate-fade-in-up">Sobre o Evento</h2>
+            <p class="text-xl leading-relaxed max-w-4xl mx-auto mb-8 text-text-on-light animate-fade-in-up delay-100">
+                O Congresso Internacional sobre Regulação da Proteção de Dados, IA e Cibersegurança: Perspectivas Jurídicas Brasil-Europa, organizado pelo Instituto de Estudos Jurídicos e de Diálogos Constitucionais (IDECON), é um evento imperdível para profissionais e acadêmicos da área jurídica.
+            </p>
+            <p class="text-xl leading-relaxed max-w-4xl mx-auto text-text-on-light animate-fade-in-up delay-200">
+                Reuniremos os mais renomados especialistas brasileiros e europeus para debater os principais desafios e avanços regulatórios na era digital, abordando temas cruciais como transparência pública, proteção de dados pessoais, inteligência artificial, governança de riscos cibernéticos, segurança institucional e demais assuntos relevantes da agenda digital contemporânea.
+            </p>
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="flex flex-col items-center text-main-blue text-lg font-semibold p-6 rounded-lg bg-white shadow-lg animate-fade-in-up delay-300">
+                    <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.757 7.243a1 1 0 011.414 0L10 10.086l2.829-2.829a1 1 0 111.414 1.414L11.414 11.5l2.829 2.829a1 1 0 01-1.414 1.414L10 12.914l-2.829 2.829a1 1 0 01-1.414-1.414L8.586 11.5l-2.829-2.829a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span>Auditório do Hotel Cullinan - Brasília, DF</span>
+                </div>
+                <div class="flex flex-col items-center text-main-blue text-lg font-semibold p-6 rounded-lg bg-white shadow-lg animate-fade-in-up delay-400">
+                    <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                    <span>18 e 19 de agosto de 2025</span>
+                </div>
+                <div class="flex flex-col items-center text-main-blue text-lg font-semibold p-6 rounded-lg bg-white shadow-lg animate-fade-in-up delay-500">
+                    <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clip-rule="evenodd"></path></svg>
+                    <span>Das 08h00 às 18h00</span>
+                </div>
+                <div class="flex flex-col items-center text-main-blue text-lg font-semibold p-6 rounded-lg bg-white shadow-lg animate-fade-in-up delay-600">
+                    <svg class="w-12 h-12 mb-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 12a1 1 0 100-2 1 1 0 000 2zm2 5a1 1 0 100-2 1 1 0 000 2zm-2-2a1 1 0 100-2 1 1 0 000 2zm-2 2a1 1 0 100-2 1 1 0 000 2zm-2-2a1 1 0 100-2 1 1 0 000 2zm-2-2a1 1 0 100-2 1 1 0 000 2zm-2-2a1 1 0 100-2 1 1 0 000 2zm-2-2a1 1 0 100-2 1 1 0 000 2zm-2-2a1 1 0 100-2 1 1 0 000 2z"></path><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-2-4a1 1 0 11-2 0 1 1 0 012 0zm-2-4a1 1 0 11-2 0 1 1 0 012 0zm-2-4a1 1 0 11-2 0 1 1 0 012 0zm-2-4a1 1 0 11-2 0 1 1 0 012 0zm-2-4a1 1 0 11-2 0 1 1 0 012 0zm-2-4a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd"></path></svg>
+                    <span>Carga horária total: 20 horas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Palestrantes -->
+    <section id="palestrantes" class="py-20 px-4 md:px-8 lg:px-16 bg-deep-blue"> <!-- Fundo em azul profundo -->
+        <div class="container mx-auto text-center">
+            <h2 class="section-title">Palestrantes e Convidados</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-12">
+                <!-- Ministra Edilene Lôbo -->
+                <div class="speaker-card">
+                    <img src="images/EVENTO_IDECON_(1).jpg" alt="Ministra Edilene Lôbo" class="speaker-image">
+                    <h3 class="text-xl font-bold text-main-blue">Ministra Edilene Lôbo</h3>
+                    <p class="text-center mt-2 text-sm">Ministra Substituta do Tribunal Superior Eleitoral do Brasil (TSE), doutora em Direito Público.</p>
+                </div>
+                <!-- Dra. Andrea Willemin -->
+                <div class="speaker-card">
+                    <img src="images/EVENTO_IDECON_(2).jpg" alt="Dra. Andrea Willemin" class="speaker-image">
+                    <h3 class="text-xl font-bold text-main-blue">Dra. Andrea Willemin</h3>
+                    <p class="text-center mt-2 text-sm">Chief Global Privacy & AI Governance Officer do Grupo Portobello. Doutora em Direito Constitucional (Suíça).</p>
+                </div>
+                <!-- Dr. João Santa Terra Júnior -->
+                <div class="speaker-card">
+                    <img src="images/EVENTO_IDECON_(3).jpg" alt="Dr. João Santa Terra Júnior" class="speaker-image">
+                    <h3 class="text-xl font-bold text-main-blue">Dr. João Santa Terra Júnior</h3>
+                    <p class="text-center mt-2 text-sm">Promotor de Justiça no Estado de São Paulo. Doutorando em Direito Penal na Universidade de Salamanca (Espanha).</p>
+                </div>
+                <!-- Dr. Anxo Varela Hernández -->
+                <div class="speaker-card">
+                    <img src="images/EVENTO_IDECON_(4).jpg" alt="Dr. Anxo Varela Hernández" class="speaker-image">
+                    <h3 class="text-xl font-bold text-main-blue">Dr. Anxo Varela Hernández</h3>
+                    <p class="text-center mt-2 text-sm">Professor titular da Universidade de Santiago de Compostela (Espanha), pesquisador líder no Centro de Estudos de Segurança (CESEG/USC).</p>
+                </div>
+                <!-- Dra. Tatiana Kolly Wasilewski Rodrigues -->
+                <div class="speaker-card">
+                    <img src="images/EVENTO_IDECON_(5).jpg" alt="Dra. Tatiana Kolly Wasilewski Rodrigues" class="speaker-image">
+                    <h3 class="text-xl font-bold text-main-blue">Dra. Tatiana Kolly Wasilewski Rodrigues</h3>
+                    <p class="text-center mt-2 text-sm">Assessora da Unidade Encarregada de Dados Pessoais do Tribunal Superior Eleitoral. Mestre em Direito Negocial.</p>
+                </div>
+                <!-- Dr. Joelson Dias -->
+                <div class="speaker-card">
+                    <img src="https://placehold.co/320x320/094ca8/ffffff?text=JD" alt="Dr. Joelson Dias" class="speaker-image">
+                    <h3 class="text-xl font-bold text-main-blue">Dr. Joelson Dias</h3>
+                    <p class="text-center mt-2 text-sm">Advogado, ex-Ministro Substituto do Tribunal Superior Eleitoral do Brasil, mestre em Direito pela Universidade de Harvard.</p>
+                </div>
+                <!-- Dr. Manoel Veríssimo Ferreira Neto -->
+                <div class="speaker-card">
+                    <img src="https://placehold.co/320x320/094ca8/ffffff?text=MV" alt="Dr. Manoel Veríssimo Ferreira Neto" class="speaker-image">
+                    <h3 class="text-xl font-bold text-main-blue">Dr. Manoel Veríssimo Ferreira Neto</h3>
+                    <p class="text-center mt-2 text-sm">Advogado. Doutorando em Direito pela FADISP. Mestre em Ciências Jurídicas e Sociais pela Universidade Federal Fluminense (UFF).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programação -->
+    <section id="programacao" class="py-20 px-4 md:px-8 lg:px-16 rounded-lg shadow-md mx-auto mt-8 max-w-7xl">
+        <div class="container mx-auto text-center">
+            <h2 class="section-title">Programação</h2>
+            <div class="flex flex-col lg:flex-row justify-center gap-8 mt-12">
+                <!-- Segunda-feira -->
+                <div class="lg:w-1/2 program-day-card">
+                    <h3>SEGUNDA-FEIRA - 18 DE AGOSTO</h3>
+                    <ul class="text-left space-y-4 text-text-on-light">
+                        <li>
+                            <span class="time">08:00-08:15</span> | Credenciamento dos participantes
+                        </li>
+                        <li>
+                            <span class="time">08:15-08:30</span> | Mesa de abertura institucional
+                        </li>
+                        <li>
+                            <span class="time">08:30-09:30</span> | Conferência de abertura: Direitos Fundamentais, Inteligência Artificial e os impactos na agenda de Direitos Humanos <br><span class="speaker-name">- Ministra Edilene Lôbo</span>
+                        </li>
+                        <li>
+                            <span class="time">09:30-11:00</span> | Proteção de dados na União Europeia e na Espanha: princípios, direitos, figuras chave e atuação da Agência Espanhola de Proteção de Dados <br><span class="speaker-name">- Professor Anxo Varela Hernández</span>
+                        </li>
+                        <li>
+                            <span class="time">11:00-12:30</span> | Fundamentos de cibersegurança: ameaças digitais, segurança da informação e infraestruturas críticas <br><span class="speaker-name">- Professora Andrea Willemin</span>
+                        </li>
+                        <li>
+                            <span class="time">12:30-14:00</span> | Intervalo para almoço
+                        </li>
+                        <li>
+                            <span class="time">14:00-15:00</span> | Liberdade de expressão e comunicação na era digital: regulação, desafios e mecanismos de proteção contra manipulação informativa na Espanha <br><span class="speaker-name">- Professor Anxo Varela Hernández</span>
+                        </li>
+                        <li>
+                            <span class="time">15:00-16:45</span> | Governança de dados e resposta a incidentes: compliance, auditorias e mitigação de riscos cibernéticos <br><span class="speaker-name">- Professora Andrea Willemin</span>
+                        </li>
+                        <li>
+                            <span class="time">16:45-18:00</span> | Os Impactos do Desenvolvimento Tecnológico na Sociedade: abordagem criminal e constitucional. <br><span class="speaker-name">- Professor João Santa Terra Junior</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Terça-feira -->
+                <div class="lg:w-1/2 program-day-card">
+                    <h3>TERÇA-FEIRA - 19 DE AGOSTO</h3>
+                    <ul class="text-left space-y-4 text-text-on-light">
+                        <li>
+                            <span class="time">08:00-09:30</span> | Inteligência Artificial e computação quântica em segurança digital: impactos éticos e jurídicos <br><span class="speaker-name">- Professora Andrea Willemin</span>
+                        </li>
+                        <li>
+                            <span class="time">09:30-10:30</span> | Uso da Inteligência Artificial e proteção de dados no Brasil: lições da Europa e desafios regulatórios locais <br><span class="speaker-name">- Professora Tatiana Kolly Wasilewski Rodrigues</span>
+                        </li>
+                        <li>
+                            <span class="time">10:30-12:00</span> | Análise da Lei 19/2013, de 9 de dezembro, sobre transparência, acesso à informação pública e bom governo, e sua interseção com a normativa de proteção de dados <br><span class="speaker-name">- Professor Anxo Varela Hernández</span>
+                        </li>
+                        <li>
+                            <span class="time">12:00-13:30</span> | Intervalo para almoço
+                        </li>
+                        <li>
+                            <span class="time">13:30-15:00</span> | Regulação da cibersegurança e proteção da privacidade: análise comparativa da Lei Geral de Proteção de Dados brasileira (LGPD) e do Regulamento Geral sobre a Proteção de Dados europeu (GDPR) <br><span class="speaker-name">- Professora Andrea Willemin</span>
+                        </li>
+                        <li>
+                            <span class="time">15:00-15:15</span> | Pausa
+                        </li>
+                        <li>
+                            <span class="time">15:15-18:00</span> | Regulação da Inteligência Artificial na União Europeia: análise do Regulamento Europeu 2024/1689 e da Lei 2/2025 da Comunidade Autónoma da Galícia (Espanha) <br><span class="speaker-name">- Professor Anxo Varela Hernández</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inscrição -->
+    <section id="inscricao" class="py-20 px-4 md:px-8 lg:px-16 rounded-lg shadow-md mx-auto mt-8 max-w-7xl"> <!-- Usando o novo azul para o fundo da seção -->
+        <div class="container mx-auto text-center">
+            <h2 class="section-title">Garanta Sua Vaga!</h2>
+            <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-10 text-text-on-light">
+                As inscrições para participação presencial e virtual já estão abertas. Escolha a modalidade que melhor se adapta a você e não perca a oportunidade de aprofundar seus conhecimentos!
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-10">
+                <div class="bg-white p-8 rounded-lg shadow-lg flex-1 max-w-md speaker-card">
+                    <h3 class="text-2xl font-bold text-main-blue mb-4">Participação Presencial</h3>
+                    <p class="text-gray-700 mb-6">Desfrute da experiência completa em Brasília, com networking exclusivo e interação direta com os palestrantes e outros profissionais da área.</p>
+                    <img src="images/EVENTO_IDECON_(6).jpg" alt="QR Code Presencial" class="mx-auto w-[400px] h-[400px] mb-6 rounded-lg border border-gray-200 object-contain">
+                    <a href="https://pay.kiwify.com.br/83rDXCO" target="_blank" class="btn-primary inline-block font-bold text-lg w-full">Inscrever-se Presencial</a>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg flex-1 max-w-md speaker-card">
+                    <h3 class="text-2xl font-bold text-main-blue mb-4">Participação Virtual</h3>
+                    <p class="text-gray-700 mb-6">Acompanhe o congresso de onde estiver, com transmissão ao vivo e acesso a todo o conteúdo, ideal para quem busca flexibilidade.</p>
+                    <img src="images/EVENTO_IDECON_(7).jpg" alt="QR Code Virtual" class="mx-auto w-[400px] h-[400px] mb-6 rounded-lg border border-gray-200 object-contain">
+                    <a href="https://pay.kiwify.com.br/81KngBq" target="_blank" class="btn-primary inline-block font-bold text-lg w-full">Inscrever-se Virtual</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção do Mapa -->
+    <section id="mapa" class="py-20 px-4 md:px-8 lg:px-16 mx-auto max-w-7xl text-center">
+        <h2 class="section-title">Localização do Evento</h2>
+        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-6 text-text-on-dark">
+            O Congresso Internacional IDECON será realizado no Auditório do Hotel Cullinan, em Brasília, Distrito Federal.
+        </p>
+        <div class="map-container">
+            <!-- O URL do Google Maps foi mantido com as coordenadas para garantir o funcionamento, pois URLs curtas não são ideais para incorporação direta. -->
+            <iframe src="https://maps.google.com/maps?q=-15.78912868903522,-47.8829112851493&z=15&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://api.whatsapp.com/send/?phone=5561999852890" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer/Rodapé -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="images/logo_idecon.png" alt="Congresso Internacional IDECON" />
+            </div>
+
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>Sobre o Evento</h4>
+                    <ul>
+                        <li><a href="#programacao">Programação</a></li>
+                        <li><a href="#palestrantes">Palestrantes</a></li>
+                        <li><a href="#inscricao">Inscrições</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>Email: ideconinstitutojuridico@gmail.com</li>
+                        <li><a href="https://www.instagram.com/idecon.instituto" target="_blank">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/@idecon.instituto" target="_blank">YouTube</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Localização</h4>
+                    <p>Auditório do Hotel Cullinan<br>Brasília - DF</p>
+                </div>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://www.facebook.com/idecon.instituto" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/idecon.instituto" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@idecon.instituto" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Congresso Internacional IDECON. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
