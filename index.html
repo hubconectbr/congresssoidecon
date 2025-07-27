@@ -22,6 +22,8 @@
             --color-card-background: #ffffff; /* Fundo de cards (mantido branco para contraste) */
             --color-border-light: #B0C4DE; /* Borda sutil com tom azulado */
             --color-whatsapp-green: #25D366; /* Cor verde do WhatsApp */
+            --color-red-button: #DC3545; /* Novo: Cor de fundo para o botão vermelho */
+            --color-red-button-hover: #C82333; /* Novo: Cor de fundo para o botão vermelho no hover */
         }
 
         body {
@@ -42,7 +44,7 @@
             border-color: var(--color-main-blue);
         }
         .btn-primary {
-            background-color: var(--color-main-blue);
+            background-color: var(--color-red-button); /* Alterado para vermelho */
             color: var(--color-text-on-dark);
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
@@ -51,7 +53,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .btn-primary:hover {
-            background-color: var(--color-medium-blue);
+            background-color: var(--color-red-button-hover); /* Alterado para vermelho mais escuro no hover */
             transform: translateY(-2px);
         }
         .speaker-card {
@@ -73,8 +75,8 @@
 
         .speaker-image-container {
             position: relative;
-            width: 320px; /* Aumentado em 100% (de 160px para 320px) */
-            height: 320px; /* Aumentado em 100% (de 160px para 320px) */
+            width: 416px; /* Aumentado em 30% (de 320px para 416px) */
+            height: 416px; /* Aumentado em 30% (de 320px para 416px) */
             border-radius: 0.75rem;
             overflow: hidden; /* Garante que a imagem e o overlay respeitem o border-radius */
             margin-bottom: 1rem;
@@ -85,7 +87,7 @@
         .speaker-image {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Garante que a imagem completa seja visível, sem cortar */
+            object-fit: cover; /* Garante que a imagem preencha o container, cortando se necessário */
             transition: transform 0.3s ease;
         }
 
@@ -634,6 +636,17 @@
                     <h3 class="text-xl font-bold text-main-blue">Dr. Manoel Veríssimo Ferreira Neto</h3>
                     <p class="text-center mt-2 text-sm">Advogado. Doutorando em Direito pela FADISP. Mestre em Ciências Jurídicas e Sociais pela Universidade Federal Fluminense (UFF).</p>
                 </div>
+				<!-- Prof. Me. Benedito Palheta dos Santos -->
+                <div class="speaker-card">
+                    <div class="speaker-image-container">
+                        <img src="images/EVENTO_IDECON_(10).jpg" alt="Prof. Me. Benedito Palheta dos Santos" class="speaker-image">
+                        <div class="speaker-overlay">
+                            <button class="speaker-overlay-button" onclick="openModal('Prof. Me. Benedito Palheta dos Santos')">SAIBA MAIS</button>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-main-blue">Prof. Me. Benedito Palheta dos Santos</h3>
+                    <p class="text-center mt-2 text-sm">Servidor da Justica Eleitoral.Palestrante e Especialista em Cibersegurança e pesquisador em Inteligência Artificial, proteção de dados e automação.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -810,7 +823,8 @@
             "Dr. Anxo Varela Hernández": "Professor titular da Universidade de Santiago de Compostela (Espanha), pesquisador líder no Centro de Estudos de Segurança (CESEG/USC), mestre em Direitos Humanos, Democracia e Tutela dos Direitos Fundamentais pela Universidade de Castilla La Mancha, com vasta experiência em governança de riscos cibernéticos, segurança da informação e políticas públicas na União Europeia.",
             "Dra. Tatiana Kolly Wasilewski Rodrigues": "Assessora da Unidade Encarregada de Dados Pessoais do Tribunal Superior Eleitoral, mestre em Direito Negocial pela Universidade Estadual de Londrina e Doutoranda em Ensino de Ciência e Tecnologia pela Universidade Tecnológica Federal do Paraná. Professora de Direito Digital Eleitoral na Pontifícia Universidade Católica do Paraná (PUCPR).",
             "Dr. Joelson Dias": "Advogado, ex-Ministro Substituto do Tribunal Superior Eleitoral do Brasil, mestre em Direito pela Universidade de Harvard. Sócio fundador e presidente o Instituto de Estudos Jurídicos e de Diálogos Constitucionais - IDECON.",
-            "Dr. Manoel Veríssimo Ferreira Neto": "Advogado. Doutorando em Direito pela FADISP. Mestre em Ciências Jurídicas e Sociais pela Universidade Federal Fluminense (UFF). Professor da Cadeira de Direito Digital da UNAMA."
+            "Dr. Manoel Veríssimo Ferreira Neto": "Advogado. Doutorando em Direito pela FADISP. Mestre em Ciências Jurídicas e Sociais pela Universidade Federal Fluminense (UFF). Professor da Cadeira de Direito Digital da UNAMA.",
+            "Prof. Me. Benedito Palheta dos Santos": "Servidor da Justica Eleitoral com mais de 25 anos em TI. Palestrante e Especialista em Cibersegurança e pesquisador em Inteligência Artificial, proteção de dados e automação. Integra o NEP/EJEC do TRE-CE, e servidor de carreira do TRE-TO. É membro da CAOESTE e colabora com a Transparência Electoral. Professor convidado da UFT e criador do agente virtual LExGovAI."
         };
 
         // Get the modal
